@@ -6,6 +6,7 @@
 # 
 #    http://shiny.rstudio.com/
 #
+
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
 library(shiny)
@@ -51,17 +52,15 @@ shinyUI(fluidPage(
           tabItem( tabName = "Data",
                    h1("Career Probabillity of Employment"),
                    
-                   #Place input choices here
-                   #Need to input data
-                   checkboxGroupInput("checkGroup", label = h3("Career Choices"), choices = major_list),
-                   sliderInput("bins",
-                               "Number of bins:",
-                               min = 1,
-                               max = 50,
-                               value = 30),
                    
                    #Place Plots and data to display here
-                   plotOutput("distPlot")
+                   plotOutput("distPlot"),
+                   
+                   #Place input choices here
+                   #Need to input data
+                   checkboxGroupInput("checkGroup", label = h3("Career Choices"), choices = major_list)
+
+                   
           ),
           
           tabItem( tabName = "Data2",
