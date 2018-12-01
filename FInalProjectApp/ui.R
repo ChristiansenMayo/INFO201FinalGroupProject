@@ -9,6 +9,7 @@
 
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
+#install.packages("shinydashboard")
 library(shiny)
 library(shinydashboard)
 
@@ -16,6 +17,10 @@ library(shinydashboard)
 shinyUI(fluidPage(
   theme = "style.css",
   class = "dark",
+  tags$style(type="text/css",
+             ".shiny-output-error { visibility: hidden; }",
+             ".shiny-output-error:before { visibility: hidden; }"
+  ),
   
   # Application title
   titlePanel("College Major Information"),
