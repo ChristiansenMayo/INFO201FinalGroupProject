@@ -10,6 +10,7 @@
 data <- read.csv("../data/all-ages.csv")
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
+major_gender <- read.csv("../data/women-stem.csv")
 library(shiny)
 library(dplyr)
 
@@ -32,7 +33,7 @@ shinyServer(function(input, output) {
   output$displot2 <- renderPlot({
     
     #Filter Data
-    major_name <- filter(data, data$Major_category == input$careerchoices2)
+    major_stem <- filter(data, data$Major_category == input$careerchoices2)
     
     # Draw bar Chart
     ggplot(major_name, aes(x = Major, y = Total, label = Total)) + geom_bar(stat = "identity") + coord_flip() + geom_text(color = "red", size = 5) #+ coord_polar(theta = "y") + scale_fill_brewer(palette = "set1")
