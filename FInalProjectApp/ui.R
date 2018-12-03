@@ -12,6 +12,8 @@ major_list <- unique(major$Major_Category)
 #install.packages("shinydashboard")
 library(shiny)
 library(shinydashboard)
+library(dplyr)
+library(ggplot2)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -24,8 +26,6 @@ shinyUI(fluidPage(
   
   # Application title
   titlePanel("College Major Information"),
-  
-  # Sidebar with a slider input for number of bins 
     
     dashboardPage(
       dashboardHeader(title = "Dashboard",
@@ -49,7 +49,15 @@ shinyUI(fluidPage(
           #Homepage
           tabItem( tabName = "home",
                    h1("Welcome to the Homepage!"),
-                   p("Description of project will go here on the homepage"),
+                   column(11,  p("The data set that our group has chosen to work with is College Majors, accessed from the fivethirtyeight blog, 
+                      and collected by The American Community Survey. 
+                      The data was created to inform students about how the major you pick determines your chance of economic success. 
+                      Our project gives insight help to students who are confused of what majors to take, 
+                      and provides students with the information from the view of gender and future employment for them to refer to.")),
+                   column(11, p("Our project will be answering these questions")),
+                   column(11, p("- If I choose a certain major, what's the probability of being employed?")),
+                   column(11, p("- What Careers are popular within Males and what is within Females?")),
+                   column(11, p("- What's the difference of earnings between undergraduate and masters?")),
                    textOutput("pwd")
                    
           ),
@@ -57,19 +65,19 @@ shinyUI(fluidPage(
           tabItem( tabName = "Data",
                    h1("Career Probabillity of Employment"),
                    
-                   
                    #Place Plots and data to display here
                    plotOutput("distPlot"),
                    
                    #Place input choices here
-                   #Need to input data
-                   checkboxGroupInput("checkGroup", label = h3("Career Choices"), choices = major_list)
+                   radioButtons("careerchoices", label = h3("Career Choices"), choices = major_list)
 
-                   
           ),
           
           tabItem( tabName = "Data2",
-                   h1("Popular Careers")
+                   h1("Popular Careers"),
+                   plotOutput("displot2"),
+                   
+                   radioButtons("careerchoices2", label = h3("Career Choices"), choices = major_list)
         
           ),
           
