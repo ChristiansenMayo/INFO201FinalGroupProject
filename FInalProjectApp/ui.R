@@ -9,6 +9,9 @@
 
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
+
+major_gender <- read.csv("../data/women-stem.csv")
+major_list_stem <- unique(major_gender$Major_category)
 #install.packages("shinydashboard")
 library(shiny)
 library(shinydashboard)
@@ -77,7 +80,7 @@ shinyUI(fluidPage(
                    h1("Popular Careers"),
                    plotOutput("displot2"),
                    
-                   radioButtons("careerchoices2", label = h3("Career Choices"), choices = major_list)
+                   radioButtons("careerchoices2", label = h3("Career Choices"), choices = major_list_stem)
         
           ),
           
