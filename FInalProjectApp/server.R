@@ -38,4 +38,11 @@ shinyServer(function(input, output) {
     ggplot(major_name, aes(x = Major, y = Total, label = Total)) + geom_bar(stat = "identity") + coord_flip() + geom_text(color = "red", size = 5) #+ coord_polar(theta = "y") + scale_fill_brewer(palette = "set1")
     
   })
+  output$displot3 <-  renderPlot({
+    
+    #Filter Data
+    major_earnings <- filter(data, data$Major_category == input$careerchoices3)
+    
+    ggplot(major_earnings, aes(x = "", Median, fill = Major, label = )) + geom_bar(stat = "identity") + coord_polar(theta = "y") 
+  })
 })

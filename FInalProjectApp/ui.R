@@ -82,7 +82,10 @@ shinyUI(fluidPage(
           ),
           
           tabItem( tabName = "Data3",
-                   h1("Majors Earnings")
+                   h1("Majors Earnings"),
+                   plotOutput("displot3"),
+                   
+                   radioButtons("careerchoices3", label = h3("Career Choices"), choices = major_list)
           )
 
         )
