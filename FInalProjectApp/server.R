@@ -6,7 +6,7 @@
 # 
 #    http://shiny.rstudio.com/
 #
-#source("../employment.R")
+
 data <- read.csv("data/all-ages.csv")
 major <- read.csv("data/majors-list.csv")
 major_list <- unique(major$Major_Category)
