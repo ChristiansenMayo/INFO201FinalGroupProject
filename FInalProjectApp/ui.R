@@ -10,6 +10,7 @@
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
 major_gender <- read.csv("../data/women-stem.csv")
+major_list_all <- unique(major$Major)
 major_list_stem <- unique(major_gender$Major_category)
 #install.packages("shinydashboard")
 library(shiny)
@@ -98,9 +99,7 @@ shinyUI(fluidPage(
                    h1("Undergrads vs Non-grads"),
                    plotOutput("displot4"),
                    
-                   radioButtons("careerchoices4", label = h3("Career Choices"), choices = major_list),
-                   
-                   radioButtons("careerchoices4indepth", label = h3("Type of Career"), choices = major_list)
+                   selectInput("careerchoices4", label = h3("Career Choices"), choices = major$Major)
                    
                    
           )
