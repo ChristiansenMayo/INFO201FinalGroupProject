@@ -12,6 +12,7 @@ major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
 major_gender <- read.csv("../data/women-stem.csv")
 major_list_stem <- unique(major$Major_category)
+recent_grads <- read.csv("data/recent-grads.csv", stringsAsFactors = FALSE)
 library(shiny)
 library(dplyr)
 library(RColorBrewer)
@@ -34,12 +35,32 @@ shinyServer(function(input, output) {
   })
   output$displot2 <- renderPlot({
     
-    #Filter Data
-    major_stem <- filter(major_gender, major_gender$Major_category == input$careerchoices2)
+    recent_grads_arrange <- recent_grads %>% arrange(Major_category)
+    recent_grads[is.na(recent_grads)] <- 0
+    majors <- unique(recent_grads_arrange$Major_category)
+    majors <- majors[c(1, 2, 3, 12, 4, 13, 5, 6, 7, 14, 8, 9, 10, 11, 15, 16)]
+    num_men <- c()
+    num_women <- c()
     
-    # Draw bar Chart
-    #ggplot(major_stem, aes(x = Major, y = Total, label = Total)) + geom_bar(stat = "identity") + coord_flip() + geom_text(color = "red", size = 5) #+ coord_polar(theta = "y") + scale_fill_brewer(palette = "set1")
-    ggplot(major_stem, aes(x = "", ShareWomen, fill = Major, label = )) + geom_bar(stat = "identity") + coord_polar(theta = "y") + theme(axis.text = element_blank()) + ggtitle("") + ylab("Percentage Women") #+ scale_fill_manual(values = getPalette(colourCount))
+    for (i in 1:length(majors)) {
+      data_by_major <- recent_grads %>% filter(Major_category == majors[i]) %>% 
+        mutate(M = sum(Men)) %>% mutate(F = sum(Women))
+      num_men <- c(num_men, data_by_major[1, "M"])
+      num_women <- c(num_women, data_by_major[1, "F"])
+    }
+    
+    if (input$check == "Male") {
+      pct <- round(num_men / sum(num_men) * 100)
+      lbls <- paste0(majors, " ", pct, "%")
+      pie(num_men, labels = lbls, col = rainbow(length(lbls)), 
+          main = "Pie Chart of Men", radius = 1)
+    }
+    else {
+      pct <- round(num_women / sum(num_women) * 100)
+      lbls <- paste0(majors, " ", pct, "%")
+      pie(num_women, labels = lbls, col = rainbow(length(lbls)), 
+          main = "Pie Chart of Women", radius = 1)
+    }
   })
   output$displot3 <-  renderPlot({
     

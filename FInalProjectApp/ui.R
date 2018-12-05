@@ -80,7 +80,9 @@ shinyUI(fluidPage(
                    h1("Popular Careers"),
                    plotOutput("displot2"),
                    
-                   radioButtons("careerchoices2", label = h3("Career Choices"), choices = major_list_stem)
+                   radioButtons("check", label = h3("Select M/F"), choices = c("Male", "Female"))
+                   
+                   #radioButtons("careerchoices2", label = h3("Career Choices"), choices = major_list_stem)
         
           ),
           
