@@ -19,6 +19,4 @@ p <- ggplot(data=grad_d, aes(x=percentage, y=Earnings, fill=Students)) +
 p + labs(title = "Graduates and Non-Graduates earning",subtitle = major)+
 theme(plot.title=element_text(size=18, hjust=0.5, face="italic",colour="maroon",vjust=-1))+
 theme(plot.subtitle=element_text(size=13, hjust=0.5, face="italic", color="black"))
-
-
 }
