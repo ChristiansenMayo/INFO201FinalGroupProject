@@ -4,7 +4,6 @@ data_grad <- read.csv("data/grad-students.csv", stringsAsFactors = FALSE)
 data_nongrad <- read.csv("data/all-ages.csv", stringsAsFactors = FALSE)
 data_all <- left_join(data_nongrad, data_grad)
 data_need <- select(data_all, Major_code, Major, Grad_median, Grad_P25, Grad_P75, Nongrad_median, Nongrad_P25, Nongrad_P75 )
-nickFunction(ARCHITECTURE)
 
 nickFunction <- function(major){
 data_1 <- filter(data_need, Major==major)
