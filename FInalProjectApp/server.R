@@ -101,7 +101,7 @@ shinyServer(function(input, output) {
         geom_bar(stat="identity", position=position_dodge(), colour="black")+
         geom_text(aes(label=Earnings), vjust=1.6, color="black", size=3.5,check_overlap = FALSE)+
         theme_minimal()
-      p + labs(title = "Graduates and Non-Graduates earning",subtitle = input$careerchoices4)+
+      p + labs(title = "Graduates and Undergraduates Earnings",subtitle = input$careerchoices4)+
         theme(plot.title=element_text(size=18, hjust=0.5, face="italic",colour="maroon",vjust=-1))+
         theme(plot.subtitle=element_text(size=13, hjust=0.5, face="italic", color="black"))
     

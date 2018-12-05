@@ -42,7 +42,7 @@ shinyUI(fluidPage(
           menuItem("Career Probabillity of Employment", tabName = "Data", icon = icon("th")),
           menuItem("Gender Population in Careers", tabName = "Data2", icon = icon("th")),
           menuItem("Majors Earnings", tabName = "Data3", icon = icon("th")),
-          menuItem("Undergrads vs Non-graduates", tabName = "Data4", icon = icon("th"))
+          menuItem("Graduates vs Undergraduates", tabName = "Data4", icon = icon("th"))
 
       )
     ),
@@ -62,7 +62,7 @@ shinyUI(fluidPage(
                    column(11, p("- If I choose a certain major, what's the probability of being employed?")),
                    column(11, p("- What Careers are popular within Males and what is within Females?")),
                    column(11, p("- What's the difference of earnings between undergraduate and masters?")),
-                   column(11, p("- What's the earning difference between Undergraduates and Non-graduates?"))
+                   column(11, p("- What's the earning difference between Undergraduates and Graduates?"))
                    
           ),
           
@@ -104,8 +104,8 @@ shinyUI(fluidPage(
           ),
           
           tabItem( tabName = "Data4",
-                   h1("Undergrads vs Non-grads"),
-                   p("Select or type specfic majors to see earning differences between Undergraduates and Non-graduates."),
+                   h1("Graduates vs Undergraduates"),
+                   p("Select or type specfic majors to see earning differences between Undergraduates and Graduates."),
                    
                    #Select Plot
                    plotOutput("displot4"),
