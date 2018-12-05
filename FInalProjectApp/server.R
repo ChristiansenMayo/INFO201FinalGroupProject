@@ -14,6 +14,7 @@ major_gender <- read.csv("../data/women-stem.csv")
 major_list_stem <- unique(major$Major_category)
 library(shiny)
 library(dplyr)
+library(RColorBrewer)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -38,13 +39,13 @@ shinyServer(function(input, output) {
     
     # Draw bar Chart
     #ggplot(major_stem, aes(x = Major, y = Total, label = Total)) + geom_bar(stat = "identity") + coord_flip() + geom_text(color = "red", size = 5) #+ coord_polar(theta = "y") + scale_fill_brewer(palette = "set1")
-    ggplot(major_earnings, aes(x = "", ShareWomen, fill = Major, label = )) + geom_bar(stat = "identity") + coord_polar(theta = "y")
+    ggplot(major_stem, aes(x = "", ShareWomen, fill = Major, label = )) + geom_bar(stat = "identity") + coord_polar(theta = "y") + theme(axis.text = element_blank()) + ggtitle("") + ylab("Percentage Women") #+ scale_fill_manual(values = getPalette(colourCount))
   })
   output$displot3 <-  renderPlot({
     
     #Filter Data
     major_earnings <- filter(data, data$Major_category == input$careerchoices3)
     
-    ggplot(major_earnings, aes(x = "", Median, fill = Major, label = )) + geom_bar(stat = "identity") + coord_polar(theta = "y") 
+    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = Median )) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5)
   })
 })
