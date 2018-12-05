@@ -98,9 +98,9 @@ shinyUI(fluidPage(
                    h1("Undergrads vs Non-grads"),
                    plotOutput("displot4"),
                    
-                   radioButtons("careerchoices4", label = h3("Career Choices"), choices = major_list)#,
+                   radioButtons("careerchoices4", label = h3("Career Choices"), choices = major_list),
                    
-                   #radioButtons("careerchoices4indepth", label = h3("Type of Career"), choices = major_selection)
+                   radioButtons("careerchoices4indepth", label = h3("Type of Career"), choices = major_list)
                    
                    
           )

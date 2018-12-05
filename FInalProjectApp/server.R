@@ -72,8 +72,14 @@ shinyServer(function(input, output) {
   output$displot4 <-  renderPlot({
     
     #Filter Data
-    major_earnings <- filter(data, data$Major_category == input$careerchoices4)
-    major_selection <- filter(major_earnings, input$careerchoices4indepth == Major)
-    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = paste0("$", Median))) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 6000)
+    major_list <- filter(data, data$Major_category == input$careerchoices4)
+    
+    for (i in 1:length(majors)) {
+      data_by_major <- recent_grads %>% filter(Major_category == majors[i]) %>% 
+        mutate(M = sum(Men)) %>% mutate(F = sum(Women))
+      num_men <- c(num_men, data_by_major[1, "M"])
+      num_women <- c(num_women, data_by_major[1, "F"])
+      
+    }
   })
 })
