@@ -26,7 +26,7 @@ shinyServer(function(input, output) {
     major_name <- filter(data, data$Major_category == input$careerchoices)
     
     # draw the histogram with the specified bins
-    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, label = round(major_name$Employed / major_name$Total, digits = 2))) + geom_bar(stat="identity") + ggtitle("Majors") + xlab("Majors") + ylab("Employment Rate") + coord_flip() + geom_text(color = "red", size = 5)
+    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, label = round(major_name$Employed / major_name$Total, digits = 2))) + geom_bar(stat="identity") + ggtitle("Majors") + xlab("Majors") + ylab("Employment Rate") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 0.011)
     
   })
   output$pwd <- renderText({
@@ -67,6 +67,13 @@ shinyServer(function(input, output) {
     #Filter Data
     major_earnings <- filter(data, data$Major_category == input$careerchoices3)
     
-    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = Median )) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5)
+    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = paste0("$", Median))) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 6000)
+  })
+  output$displot4 <-  renderPlot({
+    
+    #Filter Data
+    major_earnings <- filter(data, data$Major_category == input$careerchoices4)
+    major_selection <- filter(major_earnings, input$careerchoices4indepth == Major)
+    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = paste0("$", Median))) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 6000)
   })
 })

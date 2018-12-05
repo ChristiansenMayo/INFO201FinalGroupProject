@@ -9,7 +9,6 @@
 
 major <- read.csv("../data/majors-list.csv")
 major_list <- unique(major$Major_Category)
-
 major_gender <- read.csv("../data/women-stem.csv")
 major_list_stem <- unique(major_gender$Major_category)
 #install.packages("shinydashboard")
@@ -41,7 +40,8 @@ shinyUI(fluidPage(
           menuItem("HomePage", tabName = "home", icon = icon("dashboard")),
           menuItem("Career Probabillity of Employment", tabName = "Data", icon = icon("th")),
           menuItem("Popular Careers", tabName = "Data2", icon = icon("th")),
-          menuItem("Majors Earnings", tabName = "Data3", icon = icon("th"))
+          menuItem("Majors Earnings", tabName = "Data3", icon = icon("th")),
+          menuItem("Undergrads vs Non-grads", tabName = "Data4", icon = icon("th"))
 
       )
     ),
@@ -91,6 +91,18 @@ shinyUI(fluidPage(
                    plotOutput("displot3"),
                    
                    radioButtons("careerchoices3", label = h3("Career Choices"), choices = major_list)
+                   
+          ),
+          
+          tabItem( tabName = "Data4",
+                   h1("Undergrads vs Non-grads"),
+                   plotOutput("displot4"),
+                   
+                   radioButtons("careerchoices4", label = h3("Career Choices"), choices = major_list)#,
+                   
+                   #radioButtons("careerchoices4indepth", label = h3("Type of Career"), choices = major_selection)
+                   
+                   
           )
 
         )
