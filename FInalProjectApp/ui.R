@@ -7,9 +7,9 @@
 #    http://shiny.rstudio.com/
 #
 
-major <- read.csv("../data/majors-list.csv")
+major <- read.csv("data/majors-list.csv")
 major_list <- unique(major$Major_Category)
-major_gender <- read.csv("../data/women-stem.csv")
+major_gender <- read.csv("data/women-stem.csv")
 major_list_all <- unique(major$Major)
 major_list_stem <- unique(major_gender$Major_category)
 #install.packages("shinydashboard")
@@ -40,9 +40,9 @@ shinyUI(fluidPage(
         sidebarMenu( #These are the icons you can click on for the sidebar
           menuItem("HomePage", tabName = "home", icon = icon("dashboard")),
           menuItem("Career Probabillity of Employment", tabName = "Data", icon = icon("th")),
-          menuItem("Popular Careers", tabName = "Data2", icon = icon("th")),
+          menuItem("Gender Population in Careers", tabName = "Data2", icon = icon("th")),
           menuItem("Majors Earnings", tabName = "Data3", icon = icon("th")),
-          menuItem("Undergrads vs Non-grads", tabName = "Data4", icon = icon("th"))
+          menuItem("Undergrads vs Non-graduates", tabName = "Data4", icon = icon("th"))
 
       )
     ),
@@ -62,12 +62,13 @@ shinyUI(fluidPage(
                    column(11, p("- If I choose a certain major, what's the probability of being employed?")),
                    column(11, p("- What Careers are popular within Males and what is within Females?")),
                    column(11, p("- What's the difference of earnings between undergraduate and masters?")),
-                   textOutput("pwd")
+                   column(11, p("- What's the earning difference between Undergraduates and Non-graduates?"))
                    
           ),
           
           tabItem( tabName = "Data",
                    h1("Career Probabillity of Employment"),
+                   p("Choose a career major category to view the probability rate of being employed."),
                    
                    #Place Plots and data to display here
                    plotOutput("distPlot"),
@@ -78,7 +79,10 @@ shinyUI(fluidPage(
           ),
           
           tabItem( tabName = "Data2",
-                   h1("Popular Careers"),
+                   h1("Gender Population in Careers"),
+                   p("Select Male or Female to see gender population percentages in a major."),
+                   
+                   #Place plot
                    plotOutput("displot2"),
                    
                    radioButtons("check", label = h3("Select M/F"), choices = c("Male", "Female"))
@@ -89,16 +93,24 @@ shinyUI(fluidPage(
           
           tabItem( tabName = "Data3",
                    h1("Majors Earnings"),
+                   p("Select major category to see the Median level of earnings for majors in certain fields."),
+                   
+                   #place plot
                    plotOutput("displot3"),
                    
+                   #Select Input
                    radioButtons("careerchoices3", label = h3("Career Choices"), choices = major_list)
                    
           ),
           
           tabItem( tabName = "Data4",
                    h1("Undergrads vs Non-grads"),
+                   p("Select or type specfic majors to see earning differences between Undergraduates and Non-graduates."),
+                   
+                   #Select Plot
                    plotOutput("displot4"),
                    
+                   #Place Input
                    selectInput("careerchoices4", label = h3("Career Choices"), choices = major$Major)
                    
                    

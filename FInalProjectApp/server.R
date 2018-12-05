@@ -7,10 +7,10 @@
 #    http://shiny.rstudio.com/
 #
 #source("../employment.R")
-data <- read.csv("../data/all-ages.csv")
-major <- read.csv("../data/majors-list.csv")
+data <- read.csv("data/all-ages.csv")
+major <- read.csv("data/majors-list.csv")
 major_list <- unique(major$Major_Category)
-major_gender <- read.csv("../data/women-stem.csv")
+major_gender <- read.csv("data/women-stem.csv")
 major_list_stem <- unique(major$Major_category)
 recent_grads <- read.csv("data/recent-grads.csv", stringsAsFactors = FALSE)
 library(shiny)
@@ -26,7 +26,14 @@ shinyServer(function(input, output) {
     major_name <- filter(data, data$Major_category == input$careerchoices)
     
     # draw the histogram with the specified bins
-    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, label = round(major_name$Employed / major_name$Total, digits = 2))) + geom_bar(stat="identity") + ggtitle("Majors") + xlab("Majors") + ylab("Employment Rate") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 0.011)
+    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, fill = major_name$Major, label = paste0(round(major_name$Employed / major_name$Total, digits = 2), "%"))) + 
+      geom_bar(stat="identity") + 
+      ggtitle("Majors") + 
+      xlab("Majors") + 
+      ylab("Employment Rate") + 
+      coord_flip() + 
+      geom_text(color = "red", size = 5, nudge_y = 0.02) + 
+      guides(fill=FALSE, color=FALSE)
     
   })
   output$pwd <- renderText({
@@ -67,7 +74,13 @@ shinyServer(function(input, output) {
     #Filter Data
     major_earnings <- filter(data, data$Major_category == input$careerchoices3)
     
-    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = paste0("$", Median))) + geom_bar(stat = "identity") + xlab("") + coord_flip() + geom_text(color = "red", size = 5, nudge_y = 6000)
+    #Plot data
+    ggplot(major_earnings, aes(x = Major, Median, fill = Major, label = paste0("$", Median))) + 
+      geom_bar(stat = "identity") + 
+      xlab("") + 
+      coord_flip() +
+      geom_text(color = "red", size = 5, nudge_y = 6000) +
+      guides(fill=FALSE, color=FALSE)
   })
   output$displot4 <-  renderPlot({
     
