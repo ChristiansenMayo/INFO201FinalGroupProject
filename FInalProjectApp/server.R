@@ -26,7 +26,7 @@ shinyServer(function(input, output) {
     major_name <- filter(data, data$Major_category == input$careerchoices)
     
     # draw the histogram with the specified bins
-    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, fill = major_name$Major, label = paste0(round(major_name$Employed / major_name$Total, digits = 2), "%"))) + 
+    ggplot(major_name, aes(x = major_name$Major, y = major_name$Employed / major_name$Total, fill = major_name$Major, label = paste0(round(major_name$Employed / major_name$Total, digits = 2)*100, "%"))) + 
       geom_bar(stat="identity") + 
       ggtitle("Majors") + 
       xlab("Majors") + 
