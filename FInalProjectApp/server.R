@@ -94,8 +94,8 @@ shinyServer(function(input, output) {
       data_1 <- filter(data_need, Major==input$careerchoices4)
       grad_d <- data.frame(
         Students = factor(c("Graduate","Graduate","Graduate","Undergraduate","Undergraduate","Undergraduate")),
-        percentage = factor(c("25Median","Median","75Median","25Median","Median","75Median"), levels=c("Median","25Median","75Median")),
-        Earnings = c(data_1[1,3], data_1[1,4], data_1[1,5], data_1[1,6], data_1[1,7], data_1[1,8])
+        percentage = factor(c("25 Percent","Median","75 Percent","25 Percent","Median","75 Percent"), levels=c("25 Percent","Median","75 Percent")),
+        Earnings = c(data_1[1,4], data_1[1,3], data_1[1,5], data_1[1,7], data_1[1,6], data_1[1,8])
       )
       p <- ggplot(data=grad_d, aes(x=percentage, y=Earnings, fill=Students)) +
         geom_bar(stat="identity", position=position_dodge(), colour="black")+
